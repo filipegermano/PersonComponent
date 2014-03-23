@@ -28,7 +28,7 @@ public class LocalizaPessoaRemotoImpl implements LocalizaPessoaRemoto {
         try {
             LocalizaPessoaRemoto localizaPessoaRemoto = new LocalizaPessoaRemotoImpl();
             Naming.rebind("rmi://localhost:9999/BuscaPessoaEmail", localizaPessoaRemoto);
-            return pessoaDAO.buscaPessoaEmail(email);
+            return pessoaDAO.buscaPessoaPorEmail(email);
         } catch (RemoteException | MalformedURLException ex) {
             Logger.getLogger(LocalizaPessoaRemotoImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;

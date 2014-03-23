@@ -1,6 +1,7 @@
 package br.edu.ifpb.pod.dao;
 
 import br.edu.ifpb.pod.entidades.Pessoa;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,7 +19,13 @@ public class PessoaDAOImpl implements PessoaDAO {
 
     @Override
     public void cadastraPessoa(Pessoa pessoa) {
-        manager.persist(pessoa);
+
+        if (pessoa.getId() == null) {
+            manager.persist(pessoa);
+        } else {
+            manager.merge(pessoa);
+        }
+
     }
 
     @Override
@@ -28,11 +35,40 @@ public class PessoaDAOImpl implements PessoaDAO {
 
     @Override
     public void removePessoa(Pessoa pessoa) {
+        pessoa = manager.merge(pessoa);
         manager.remove(pessoa);
     }
 
     @Override
-    public Pessoa buscaPessoaEmail(String email) {
+    public List<Pessoa> buscaPessoaEmail(String email) {
+        try {
+            Query query = manager.createQuery("select p from Pessoa p where p.email=:email");
+            query.setParameter("email", email);
+            return query.getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<Pessoa> buscaPessoas() {
+        try {
+            Query query = manager.createQuery("select p from Pessoa p");
+            return query.getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Pessoa buscaPessoasPorId(Long id) {
+//        Pessoa pessoa = new Pessoa();
+//        pessoa = manager.find(Pessoa.class, id);
+//        return pessoa;
+        return manager.find(Pessoa.class, id);
+    }
+
+    @Override
+    public Pessoa buscaPessoaPorEmail(String email) {
         try {
             Query query = manager.createQuery("select p from Pessoa p where p.email=:email");
             query.setParameter("email", email);

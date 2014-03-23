@@ -8,12 +8,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        
+        <title>Home</title>
+        <link href="../css/cssform.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="../css/cssmenu.css">
     </head>
     <body>
-        <h1>Hello World!</h1>
         <jsp:include page="menu.jsp"/>
     </body>
 </html>

@@ -1,6 +1,5 @@
 package br.edu.ifpb.pod.entidades;
 
-import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,9 +14,9 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity
 public class Pessoa implements Serializable {
-    
+
     @Id
-    @GeneratedValue(generator = "seq_pessoa" ,strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "seq_pessoa", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "seq_pessoa", allocationSize = 1)
     private Long id;
     @Column(length = 80, nullable = false)
@@ -27,11 +26,11 @@ public class Pessoa implements Serializable {
     @Column(length = 80, nullable = false, unique = true)
     private String email;
     private String token;
-    private ByteArrayInputStream[] fotos1;
-    private ByteArrayInputStream[] fotos2;
-    private ByteArrayInputStream[] fotos3;
-    private ByteArrayInputStream[] fotos4;
-    
+    private byte[] foto1;
+    private byte[] foto2;
+    private byte[] foto3;
+    private byte[] foto4;
+
     public Long getId() {
         return id;
     }
@@ -72,35 +71,35 @@ public class Pessoa implements Serializable {
         this.token = token;
     }
 
-    public ByteArrayInputStream[] getFotos1() {
-        return fotos1;
+    public byte[] getFoto1() {
+        return foto1;
     }
 
-    public void setFotos1(ByteArrayInputStream[] fotos1) {
-        this.fotos1 = fotos1;
+    public void setFoto1(byte[] foto1) {
+        this.foto1 = foto1;
     }
 
-    public ByteArrayInputStream[] getFotos2() {
-        return fotos2;
+    public byte[] getFoto2() {
+        return foto2;
     }
 
-    public void setFotos2(ByteArrayInputStream[] fotos2) {
-        this.fotos2 = fotos2;
+    public void setFoto2(byte[] foto2) {
+        this.foto2 = foto2;
     }
 
-    public ByteArrayInputStream[] getFotos3() {
-        return fotos3;
+    public byte[] getFoto3() {
+        return foto3;
     }
 
-    public void setFotos3(ByteArrayInputStream[] fotos3) {
-        this.fotos3 = fotos3;
+    public void setFoto3(byte[] foto3) {
+        this.foto3 = foto3;
     }
 
-    public ByteArrayInputStream[] getFotos4() {
-        return fotos4;
+    public byte[] getFoto4() {
+        return foto4;
     }
 
-    public void setFotos4(ByteArrayInputStream[] fotos4) {
-        this.fotos4 = fotos4;
+    public void setFoto4(byte[] foto4) {
+        this.foto4 = foto4;
     }
 }

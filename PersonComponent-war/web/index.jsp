@@ -22,11 +22,13 @@
                     <h3>Login</h3>
                     <br>
                 </div>
-                <di id="inputs">
-                    <input type="text" placeholder="Login">
-                    <input type="password" placeholder="Senha">
-                    <input type="submit" value="Entrar">
-                </di>
+                <form name="login" method="POST" action="Login">
+                    <di id="inputs">
+                        <input type="text" name="usuario" placeholder="Login">
+                        <input type="password" name="senha" placeholder="Senha">
+                        <input type="submit" value="Entrar">
+                    </di>
+                </form>
                 <br>
             </div>
         </div>
