@@ -2,6 +2,7 @@ package br.edu.ifpb.pod.rmi;
 
 import br.edu.ifpb.pod.entidades.Pessoa;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -9,5 +10,5 @@ import java.rmi.Remote;
  */
 public interface LocalizaPessoaRemoto extends Remote {
 
-    public Pessoa recuperaPessoaEmail(String email);
+    public Pessoa recuperaPessoaEmail(String email) throws RemoteException;
 }

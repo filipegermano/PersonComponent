@@ -2,6 +2,7 @@ package br.edu.ifpb.pod.servlets;
 
 import br.edu.ifpb.pod.dao.PessoaDAO;
 import br.edu.ifpb.pod.entidades.Pessoa;
+import br.edu.ifpb.pod.rmi.opencv.server.OperacoesFoto;
 import java.io.File;
 import java.io.IOException;
 import javax.ejb.EJB;
@@ -31,6 +32,8 @@ public class SalvarPessoa extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        OperacoesFoto operacoesFoto = new OperacoesFoto();
         
         Pessoa pessoa = new Pessoa();
         Long idPessoa = (Long) request.getSession().getAttribute("idPessoaL");
@@ -64,6 +67,9 @@ public class SalvarPessoa extends HttpServlet {
         byte[] imagemArray4 = new byte[(int)foto4.length()];
         pessoa.setFoto4(imagemArray4);
 
+        //enviar as fotos para o serviço remoto
+        pessoa.setToken(operacoesFoto.registraFotos(null));
+        
         pessoaDAO.cadastraPessoa(pessoa);
 
         request.getRequestDispatcher("/paginas/CadastroPessoa").forward(request, response);

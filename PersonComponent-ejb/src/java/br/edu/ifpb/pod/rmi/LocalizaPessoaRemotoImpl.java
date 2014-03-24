@@ -4,8 +4,8 @@ import br.edu.ifpb.pod.dao.PessoaDAO;
 import br.edu.ifpb.pod.entidades.Pessoa;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.RemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -18,13 +18,13 @@ import javax.ejb.Stateless;
  */
 @Stateless
 @Local
-public class LocalizaPessoaRemotoImpl implements LocalizaPessoaRemoto {
+public class LocalizaPessoaRemotoImpl extends RemoteObject implements LocalizaPessoaRemoto {
 
     @EJB
     PessoaDAO pessoaDAO;
 
     @Override
-    public Pessoa recuperaPessoaEmail(String email) {
+    public Pessoa recuperaPessoaEmail(String email) throws RemoteException {
         try {
             LocalizaPessoaRemoto localizaPessoaRemoto = new LocalizaPessoaRemotoImpl();
             Naming.rebind("rmi://localhost:9999/BuscaPessoaEmail", localizaPessoaRemoto);
