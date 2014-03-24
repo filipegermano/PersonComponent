@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.RemoteObject;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -18,20 +19,18 @@ import javax.ejb.Stateless;
  */
 @Stateless
 @Local
-public class LocalizaPessoaRemotoImpl extends RemoteObject implements LocalizaPessoaRemoto {
+public class LocalizaPessoaRemotoImpl extends UnicastRemoteObject implements LocalizaPessoaRemoto {
 
     @EJB
     PessoaDAO pessoaDAO;
 
+    public LocalizaPessoaRemotoImpl() throws RemoteException {
+        super();
+    }
+
     @Override
     public Pessoa recuperaPessoaEmail(String email) throws RemoteException {
-        try {
-            LocalizaPessoaRemoto localizaPessoaRemoto = new LocalizaPessoaRemotoImpl();
-            Naming.rebind("rmi://localhost:9999/BuscaPessoaEmail", localizaPessoaRemoto);
-            return pessoaDAO.buscaPessoaPorEmail(email);
-        } catch (RemoteException | MalformedURLException ex) {
-            Logger.getLogger(LocalizaPessoaRemotoImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+        return pessoaDAO.buscaPessoaPorEmail(email);
+
     }
 }
